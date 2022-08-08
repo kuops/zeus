@@ -2,6 +2,13 @@
 
 Multi kubernetes cluster query, using informer and listers.
 
+## Dependencies
+
+- gin
+- code-generator
+- kubebuilder
+- swagger
+
 ## Quick Start
 
 Generate crd,clientset,informers using code-generator and kubebuilder.
