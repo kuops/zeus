@@ -1,0 +1,281 @@
+basePath: /api/v1
+definitions:
+  response.SuccessResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+      result: {}
+    type: object
+info:
+  contact: {}
+  description: kubernetes 多集群管理平台 API
+  title: Zeus API
+  version: "1.0"
+paths:
+  /clusters:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群信息列表
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - clusters
+  /clusters/{cluster}:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群信息
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - clusters
+  /clusters/{cluster}/namespaces:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群命名空间列表
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: labelSelector
+        in: query
+        name: labelSelector
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - namespaces
+  /clusters/{cluster}/namespaces/{namespace}:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群命名空间
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: 命名空间
+        in: path
+        name: namespace
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - namespaces
+  /clusters/{cluster}/namespaces/{namespace}/pods/{pod}:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群 pod
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: pod 名称
+        in: path
+        name: pod
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - pod
+  /clusters/{cluster}/namespaces/{namespace}/pods/{pod}/log:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群 pod 日志
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: namespace
+        in: path
+        name: namespace
+        required: true
+        type: string
+      - description: pod 名称
+        in: path
+        name: pod
+        required: true
+        type: string
+      - description: container 名称
+        in: query
+        name: container
+        type: string
+      - description: 是否跟踪
+        in: query
+        name: follow
+        type: boolean
+      - description: tail
+        in: query
+        name: tailLines
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            type: string
+      tags:
+      - pod
+  /clusters/{cluster}/nodes:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群节点列表
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: labelSelector
+        in: query
+        name: labelSelector
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - node
+  /clusters/{cluster}/nodes/{node}:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群节点
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: 节点名称
+        in: path
+        name: node
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - node
+  /clusters/{cluster}/pods:
+    get:
+      consumes:
+      - application/json
+      description: 获取集群 pod 列表
+      parameters:
+      - description: 集群名称
+        in: path
+        name: cluster
+        required: true
+        type: string
+      - description: ip
+        in: query
+        name: ip
+        type: string
+      - description: labelSelector
+        in: query
+        name: labelSelector
+        type: string
+      - description: namespace
+        in: query
+        name: namespace
+        type: string
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+      tags:
+      - pod
+swagger: "2.0"
